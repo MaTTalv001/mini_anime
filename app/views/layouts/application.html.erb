@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
 
     <%= yield :head %>
 
@@ -22,6 +23,7 @@
     <% else %>
     <%= render 'shared/before_login_header' %>
     <% end %>
+    <%= render 'shared/flash_message' %>
     <%= yield %>
   </body>
 </html>

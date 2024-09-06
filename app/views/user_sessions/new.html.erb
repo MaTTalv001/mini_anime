@@ -1,7 +1,7 @@
 <div class="hero min-h-screen bg-base-200">
   <div class="hero-content flex-col lg:flex-row-reverse">
     <div class="text-center lg:text-left">
-      <h1 class="text-5xl font-bold">ログイン</h1>
+      <h1 class="text-5xl font-bold"><%= t('user_sessions.new.login') %></h1>
       <p class="py-6">アカウントをお持ちでない方は、新規登録をお願いします。</p>
     </div>
     <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -16,11 +16,11 @@
             <%= f.password_field :password, class: "input input-bordered", placeholder: "パスワード" %>
           </div>
           <div class="form-control mt-6">
-            <%= f.submit 'ログイン', class: 'btn btn-primary' %>
+            <%= f.submit t('user_sessions.new.login'), class: 'btn btn-primary' %>
           </div>
         <% end %>
         <div class="text-center mt-4">
-          <%= link_to '新規登録', new_user_path, class: "link link-hover" %>
+          <%= link_to t('users.new.title'), new_user_path, class: "link link-hover" %>
         </div>
       </div>
     </div>
