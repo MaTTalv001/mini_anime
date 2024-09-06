@@ -14,6 +14,6 @@ class UserSessionsController < ApplicationController
     def destroy
       logout
       flash[:alert] = I18n.t('user_sessions.logout_success')
-      redirect_to root_path, status: :see_other
+      redirect_to root_path, status: :see_other, allow_other_host: true
     end
   end

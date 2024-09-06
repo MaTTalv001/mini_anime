@@ -7,3 +7,8 @@ ja:
   user:
     create_success: "ユーザー登録が完了しました"
     create_failure: "ユーザー登録に失敗しました"
+  seasons:
+    winter: '冬'
+    spring: '春'
+    summer: '夏'
+    autumn: '秋'
