@@ -8,6 +8,11 @@ class AnimeController < ApplicationController
       @query = params[:query]
       @year = params[:year]
       @season = params[:season]
+      
+      # @years と @seasons を設定
+      @years = (2000..Time.current.year).to_a.reverse
+      @seasons = ['winter', 'spring', 'summer', 'autumn']
+  
       @works = fetch_works(@query, @year, @season)
     rescue StandardError => e
       Rails.logger.error "Error fetching works: #{e.message}"
@@ -22,3 +27,4 @@ class AnimeController < ApplicationController
       api.search_works(query, year, season)
     end
   end
+  
