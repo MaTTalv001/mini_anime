@@ -1,0 +1,2 @@
+<% like = current_user.likes.find_by(annict_id: annict_id) %>
+<%= link_to 'いいね解除', like_path(like), method: :delete, data: { turbo: 'true' }, class: 'btn btn-primary btn-sm' if like %>
