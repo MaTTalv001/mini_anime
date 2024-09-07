@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get 'search', to: 'anime#search'
   post 'search', to: 'anime#results'
+  resources :liked_works, only: [:index]
   
 
 

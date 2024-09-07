@@ -1,5 +1,9 @@
-<div class="top-wrapper">
-  <div class="top-inner-text">
-    <h1>SAMPLE BOARD APP</h1>
+<div class="hero min-h-screen" style="background-image: url(<%= asset_path('top_image.jpg') %>);">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-center text-neutral-content">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">アニメを検索するだけのアプリ</h1>
+      <%= link_to "検索する", search_path, class: "btn btn-primary btn-lg" %>
+    </div>
   </div>
 </div>
