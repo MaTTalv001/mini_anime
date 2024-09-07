@@ -1,7 +1,11 @@
 <div id="like-button-<%= work['id'] %>">
   <% if like %>
-    <%= link_to 'いいねを外す', like_path(like), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'いいねを外しますか？' }, class: 'btn btn-secondary btn-sm' %>
+    <%= button_to like_path(like), method: :delete, class: 'btn btn-md btn-primary ', form: { data: { turbo_method: :delete, turbo_confirm: 'いいねを外しますか？' } } do %>
+      <i class="fas fa-thumbs-up fa-lg mr-2" aria-hidden="true"></i>
+    <% end %>
   <% else %>
-    <%= link_to 'いいね', likes_path(annict_id: work['id']), method: :post, data: { turbo_method: :post }, class: 'btn btn-primary btn-sm' %>
+    <%= button_to likes_path(annict_id: work['id']), method: :post, class: 'btn btn-md btn-primary btn-outline', form: { data: { turbo_method: :post } } do %>
+      <i class="far fa-thumbs-up fa-lg mr-2" aria-hidden="true"></i>
+    <% end %>
   <% end %>
 </div>

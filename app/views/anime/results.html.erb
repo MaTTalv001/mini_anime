@@ -34,20 +34,16 @@
               <p>シーズン: <%= work["season_name_text"] %></p>
               <div class="card-actions justify-end mt-4">
                 <% if work["official_site_url"].present? %>
-                  <%= link_to "公式サイト", work["official_site_url"], class: "btn btn-primary btn-sm", target: "_blank" %>
+                  <%= link_to "公式サイト", work["official_site_url"], class: "btn btn-primary btn-md", target: "_blank" %>
                 <% end %>
-                <% if work["twitter_username"].present? %>
-                  <%= link_to "Twitter", "https://twitter.com/#{work['twitter_username']}", class: "btn btn-secondary btn-sm", target: "_blank" %>
-                <% end %>
+                <% if work['twitter_username'].present? %>
+  <%= link_to "https://x.com/#{work['twitter_username']}", class: "btn btn-md bg-black text-white hover:bg-gray-800", target: "_blank", aria: { label: "X (旧Twitter)" } do %>
+    <i class="fab fa-x-twitter"></i>
+  <% end %>
+<% end %>
                 <% if logged_in? %>
-                <div class="mt-2" id="like-button-<%= work['id'] %>">
-                <% if @likes[work["id"]] %>
-                  <%= button_to 'いいねを外す', like_path(@likes[work["id"]].id), method: :delete, class: 'btn btn-secondary', form: { data: { turbo_method: :delete, turbo_confirm: 'いいねを外しますか？' } } %>
-                <% else %>
-                  <%= button_to 'いいね', likes_path(annict_id: work["id"]), method: :post, class: 'btn btn-primary', form: { data: { turbo_method: :post } } %>
-                <% end %>
-                </div>
-              <% end %>
+  <%= render 'shared/like_button', work: work, like: @likes[work["id"]] %>
+<% end %>
               </div>
             </div>
           </div>
