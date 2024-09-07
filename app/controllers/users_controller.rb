@@ -9,7 +9,7 @@ class UsersController < ApplicationController
         if @user.save
             session[:user_id] = @user.id
             flash[:notice] = I18n.t('user.create_success')
-            redirect_to root_path
+            redirect_to search_path
         else
             flash.now[:alert] = I18n.t('user.create_failure')
             render :new, status: :unprocessable_entity

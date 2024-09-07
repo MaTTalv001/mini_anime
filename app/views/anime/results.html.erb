@@ -2,58 +2,55 @@
     <div class="hero-content flex-col w-full">
         <h1 class="text-5xl font-bold mb-6">検索結果: <%= @query %></h1>
         <%= link_to "検索ページへ", search_path, class: "btn btn-primary mt-6", data: { turbo: false } %>
-
-        <% if flash[:alert] %>
-        <div class="alert alert-error shadow-lg mb-6">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span><%= flash[:alert] %></span>
-            </div>
-        </div>
-        <% end %>
-
-        <% if @works.any? %>
-         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <% @works.each do |work| %>
-            <div class="card w-96 bg-base-100 shadow-xl">
-                <figure>
-                <% image_url = work.dig("images", "recommended_url").presence ||
-                                work.dig("twitter", "mini_avatar_url").presence ||
-                                work.dig("twitter", "normal_avatar_url").presence ||
-                                work.dig("twitter", "original_avatar_url").presence ||
-                                work.dig("images", "facebook", "og_image_url").presence %>
-                <% if image_url.present? %>
-                    <%= image_tag image_url, alt: work["title"], class: "w-full h-48 object-cover" %>
-                <% else %>
-                    <div class="w-full h-48 bg-gray-300 flex items-center justify-center">No Image</div>
+            <% if flash[:alert] %>
+                <div class="alert alert-error shadow-lg mb-6">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span><%= flash[:alert] %></span>
+                    </div>
+                </div>
+            <% end %>
+            <% if @works.any? %>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% @works.each do |work| %>
+                    <div class="card w-96 bg-base-100 shadow-xl">
+                        <figure>
+                            <% image_url = work.dig("images", "recommended_url").presence ||
+                                    work.dig("twitter", "mini_avatar_url").presence ||
+                                    work.dig("twitter", "normal_avatar_url").presence ||
+                                    work.dig("twitter", "original_avatar_url").presence ||
+                                    work.dig("images", "facebook", "og_image_url").presence %>
+                            <% if image_url.present? %>
+                                <%= image_tag image_url, alt: work["title"], class: "w-full h-48 object-cover" %>
+                            <% else %>
+                                <div class="w-full h-48 bg-gray-300 flex items-center justify-center">No Image</div>
+                            <% end %>
+                        </figure>
+                        <div class="card-body">
+                            <h2 class="card-title"><%= work["title"] %></h2>
+                            <p>シーズン: <%= work["season_name_text"] %></p>
+                            <div class="card-actions justify-end mt-4">
+                                <% if work["official_site_url"].present? %>
+                                    <%= link_to "公式サイト", work["official_site_url"], class: "btn btn-primary btn-md", target: "_blank" %>
+                                <% end %>
+                                <% if work['twitter_username'].present? %>
+                                    <%= link_to "https://x.com/#{work['twitter_username']}", class: "btn btn-md bg-black text-white hover:bg-gray-800", target: "_blank", aria: { label: "X (旧Twitter)" } do %>
+                                        <i class="fab fa-x-twitter"></i>
+                                    <% end %>
+                                <% end %>
+                                <% if logged_in? %>
+                                    <%= render 'shared/like_button', work: work, like: @likes[work["id"]] %>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
                 <% end %>
-                </figure>
-            <div class="card-body">
-                <h2 class="card-title"><%= work["title"] %></h2>
-                <p>シーズン: <%= work["season_name_text"] %></p>
-                <div class="card-actions justify-end mt-4">
-                    <% if work["official_site_url"].present? %>
-                    <%= link_to "公式サイト", work["official_site_url"], class: "btn btn-primary btn-md", target: "_blank" %>
-                    <% end %>
-                <% if work['twitter_username'].present? %>
-    <%= link_to "https://x.com/#{work['twitter_username']}", class: "btn btn-md bg-black text-white hover:bg-gray-800", target: "_blank", aria: { label: "X (旧Twitter)" } do %>
-        <i class="fab fa-x-twitter"></i>
-    <% end %>
-<% end %>
-                <% if logged_in? %>
-    <%= render 'shared/like_button', work: work, like: @likes[work["id"]] %>
-<% end %>
-            </div>
-        </div>
+                </div>
+            <% else %>
+                <p class="text-xl">検索結果がありません。</p>
+            <% end %>
+        <%= link_to "検索ページへ", search_path, class: "btn btn-primary mt-6", data: { turbo: false } %>
     </div>
-    <% end %>
-</div>
-    <% else %>
-    <p class="text-xl">検索結果がありません。</p>
-    <% end %>
-
-    <%= link_to "検索ページへ", search_path, class: "btn btn-primary mt-6", data: { turbo: false } %>
-  </div>
 </div>
