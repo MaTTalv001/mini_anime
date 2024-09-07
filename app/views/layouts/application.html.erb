@@ -7,7 +7,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     
-
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
@@ -15,14 +14,14 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%#= javascript_importmap_tags %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-  <% if logged_in? %> <%= render 'shared/header' %>
+    <% if logged_in? %>
+      <%= render 'shared/header' %>
     <% else %>
-    <%= render 'shared/before_login_header' %>
+      <%= render 'shared/before_login_header' %>
     <% end %>
     <%= render 'shared/flash_message' %>
     <%= yield %>

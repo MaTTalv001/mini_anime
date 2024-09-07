@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get '/search', to: 'anime#search'
   post '/search', to: 'anime#results'
-  resources :favorites, only: [:index, :create]
-  delete 'favorites/:work_id', to: 'favorites#destroy', as: :destroy_favorite
+  resources :favorites, only: [:create]
+  delete 'favorites/:work_id', to: 'favorites#destroy'
 
   # Defines the root path route ("/")
   # root "posts#index"

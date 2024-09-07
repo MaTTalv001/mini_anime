@@ -18,14 +18,11 @@
       <% if work["official_site_url"].present? %>
         <%= link_to "公式サイト", work["official_site_url"], class: "btn btn-primary btn-sm", target: "_blank" %>
       <% end %>
-      <% if work["twitter_username"].present? %>
-        <%= link_to "Twitter", "https://twitter.com/#{work['twitter_username']}", class: "btn btn-secondary btn-sm", target: "_blank" %>
-      <% end %>
-      <% if current_user.favorites.exists?(work_id: work["id"]) %>
-      <%= button_to "お気に入り解除", destroy_favorite_path(work_id: work["id"]), method: :delete, class: "btn btn-error btn-sm" %>
-    <% else %>
-      <%= button_to "お気に入り", favorites_path(work_id: work["id"]), method: :post, class: "btn btn-success btn-sm" %>
-    <% end %>
+    <button class="favorite-button btn <%= current_user.favorites.exists?(work_id: work["id"]) ? 'btn-error' : 'btn-success' %> btn-sm"
+            data-work-id="<%= work["id"] %>"
+            data-action="click->favorite#toggle">
+      <%= current_user.favorites.exists?(work_id: work["id"]) ? 'お気に入り解除' : 'お気に入り' %>
+    </button>
     </div>
   </div>
 </div>
