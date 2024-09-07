@@ -32,4 +32,18 @@ class AnnictApi
         Rails.logger.error "Response body: #{response.body}"
         []
         end
+
+        def fetch_work(annict_id)
+            response = Faraday.get("#{BASE_URL}/#{annict_id}", {
+              fields: "id,title,title_kana,season_name_text,official_site_url,twitter_username,images",
+              access_token: @access_token
+            })
+          
+            if response.success?
+              JSON.parse(response.body)
+            else
+              Rails.logger.error "Annict API error: #{response.status} #{response.body}"
+              nil
+            end
+          end
     end

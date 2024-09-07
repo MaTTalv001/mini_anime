@@ -1,0 +1,31 @@
+<div class="card w-96 bg-base-100 shadow-xl">
+  <figure>
+    <% image_url = work.dig("images", "recommended_url").presence ||
+                   work.dig("twitter", "mini_avatar_url").presence ||
+                   work.dig("twitter", "normal_avatar_url").presence ||
+                   work.dig("twitter", "original_avatar_url").presence ||
+                   work.dig("images", "facebook", "og_image_url").presence %>
+    <% if image_url.present? %>
+      <img src="<%= image_url %>" alt="<%= work["title"] %>" class="w-full h-48 object-cover">
+    <% else %>
+      <div class="w-full h-48 bg-gray-300 flex items-center justify-center">No Image</div>
+    <% end %>
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title"><%= work["title"] %></h2>
+    <p>シーズン: <%= work["season_name_text"] %></p>
+    <div class="card-actions justify-end mt-4">
+      <% if work["official_site_url"].present? %>
+        <%= link_to "公式サイト", work["official_site_url"], class: "btn btn-primary btn-sm", target: "_blank" %>
+      <% end %>
+      <% if work["twitter_username"].present? %>
+        <%= link_to "Twitter", "https://twitter.com/#{work['twitter_username']}", class: "btn btn-secondary btn-sm", target: "_blank" %>
+      <% end %>
+      <% if current_user.favorites.exists?(work_id: work["id"]) %>
+      <%= button_to "お気に入り解除", destroy_favorite_path(work_id: work["id"]), method: :delete, class: "btn btn-error btn-sm" %>
+    <% else %>
+      <%= button_to "お気に入り", favorites_path(work_id: work["id"]), method: :post, class: "btn btn-success btn-sm" %>
+    <% end %>
+    </div>
+  </div>
+</div>
