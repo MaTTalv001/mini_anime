@@ -1,0 +1,7 @@
+<div id="like-button-<%= work['id'] %>">
+  <% if like %>
+    <%= link_to 'いいねを外す', like_path(like), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'いいねを外しますか？' }, class: 'btn btn-secondary btn-sm' %>
+  <% else %>
+    <%= link_to 'いいね', likes_path(annict_id: work['id']), method: :post, data: { turbo_method: :post }, class: 'btn btn-primary btn-sm' %>
+  <% end %>
+</div>
