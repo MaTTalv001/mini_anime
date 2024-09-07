@@ -60,3 +60,9 @@ end
 
 gem 'sorcery'
 gem 'rails-i18n', '~> 7.0.0'
+
+
+gem 'faraday'
+gem 'dotenv-rails'
+gem 'kaminari'
+gem 'ransack'
