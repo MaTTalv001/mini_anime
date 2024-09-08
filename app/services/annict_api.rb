@@ -8,7 +8,7 @@ class AnnictApi
     def search_works(query, year, season)
       params = {
         fields: "id,title,title_kana,season_name_text,official_site_url,twitter_username,images",
-        per_page: 20,
+        per_page: 50,
         access_token: @access_token
       }
       params[:filter_title] = query if query.present?
