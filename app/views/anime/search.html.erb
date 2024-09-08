@@ -30,29 +30,30 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const queryInput = document.getElementById('query-input');
-        const yearSelect = document.getElementById('year-select');
-        const seasonSelect = document.getElementById('season-select');
-        const searchButton = document.getElementById('search-btn');
+document.addEventListener('turbo:load', function() {
+    const queryInput = document.getElementById('query-input');
+    const yearSelect = document.getElementById('year-select');
+    const seasonSelect = document.getElementById('season-select');
+    const searchButton = document.getElementById('search-btn');
 
     function toggleSearchButton() {
         const queryValue = queryInput.value.trim();
         const yearValue = yearSelect.value;
         const seasonValue = seasonSelect.value;
-    if (queryValue && ((yearValue && seasonValue) || (!yearValue && !seasonValue))) {
-        searchButton.disabled = false;
-    } 
-    else if (!queryValue && yearValue && seasonValue) {
-        searchButton.disabled = false;
-    } 
-    else {
-        searchButton.disabled = true;
+        if (queryValue && ((yearValue && seasonValue) || (!yearValue && !seasonValue))) {
+            searchButton.disabled = false;
+        } 
+        else if (!queryValue && yearValue && seasonValue) {
+            searchButton.disabled = false;
+        } 
+        else {
+            searchButton.disabled = true;
+        }
     }
-}
 
     queryInput.addEventListener('input', toggleSearchButton);
     yearSelect.addEventListener('change', toggleSearchButton);
     seasonSelect.addEventListener('change', toggleSearchButton);
-    });
+});
+
 </script>
